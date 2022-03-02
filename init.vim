@@ -8,12 +8,14 @@ if exists('g:vscode')
     nnoremap D "_D
     nnoremap d "_d
     vnoremap d "_d
-    vnoremap dd "_dd
+    "vnoremap dd "_dd
     vnoremap c "_c
     vmap = <Cmd>call VSCodeNotifyVisual('editor.action.formatSelection',1)<CR><Esc><Esc>
     map p p`[V`]=<Esc>`]
     map P P`[V`]=<Esc>`]
-
+    noremap <Tab> <Cmd>call VSCodeNotify('tab')<CR>
+    nnoremap O i<Cmd>call VSCodeNotify('editor.action.insertLineBefore')<CR>
+    nnoremap o i<Cmd>call VSCodeNotify('editor.action.insertLineAfter')<CR>
     noremap zb <Cmd>call VSCodeNotifyVisual('editor.action.blockComment',1)<CR>
     noremap za <Cmd>call VSCodeNotify('editor.action.jumpToBracket')<CR>
     noremap zc <Cmd>call VSCodeNotify('editor.fold')<CR>
@@ -26,6 +28,10 @@ else
     Plug 'preservim/nerdtree'
     call plug#end()
 endif
+
+noremap tt gT
+nnoremap < <<
+nnoremap > >>
 "窗口移动
 nmap <c-j> <c-w>j
 nmap <c-h> <c-w>h  
@@ -84,12 +90,13 @@ nnoremap d} di}
 
 noremap H ^
 noremap L $
-map <c-d> <c-d>M
-map <c-u> <c-u>M
+"noremap <c-d> <c-d>M
+"noremap <c-u> <c-u>M
 set mouse=a
 set noendofline 
 set clipboard=unnamedplus
-set smartindent
+"set smartindent
+
 set foldenable
 set ignorecase
 set smartcase
