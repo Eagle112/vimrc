@@ -29,7 +29,7 @@ else
     call plug#end()
 endif
 
-noremap tt gT
+map tt gT
 nnoremap < <<
 nnoremap > >>
 "窗口移动
@@ -47,10 +47,10 @@ vnoremap <c-a> <c-a>gv
 vnoremap <c-x> <c-x>gv
 vnoremap < <gv      
 vnoremap > >gv  
-nnoremap * *zz
-nnoremap # #zz
-nnoremap n nzz
-nnoremap N Nzz
+map * *zz
+map # #zz
+map n nzz
+map N Nzz
 
 nnoremap v' vi'
 nnoremap v" vi"
@@ -90,8 +90,8 @@ nnoremap d} di}
 
 noremap H ^
 noremap L $
-"noremap <c-d> <c-d>M
-"noremap <c-u> <c-u>M
+"map <A-j> <c-d>
+"map <A-k> <c-u>
 set mouse=a
 set noendofline 
 set clipboard=unnamedplus
