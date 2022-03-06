@@ -20,6 +20,10 @@ if exists('g:vscode')
     noremap za <Cmd>call VSCodeNotify('editor.action.jumpToBracket')<CR>
     noremap zc <Cmd>call VSCodeNotify('editor.fold')<CR>
     noremap zo <Cmd>call VSCodeNotify('editor.unfold')<CR>
+    nnoremap <C-up> <Cmd>call VSCodeNotifyVisual('editor.action.moveLinesUpAction',1)<CR>
+    nnoremap <C-down> <Cmd>call VSCodeNotifyVisual('editor.action.moveLinesDownAction',1)<CR>
+    vnoremap <C-down> <Esc>`<my`>mzgv<Cmd>call VSCodeNotifyVisual('editor.action.moveLinesDownAction',1)<CR><Esc>`yjV`zj
+    vnoremap <C-up> <Esc>`<my`>mzgv<Cmd>call VSCodeNotifyVisual('editor.action.moveLinesUpAction',1)<CR><Esc>`ykV`zk
 else
     call plug#begin('~/AppData/Local/nvim/plugged') 
     Plug 'junegunn/vim-easy-align'
@@ -29,10 +33,12 @@ else
     call plug#end()
 endif
 
+vnoremap $ $h
 map tt gT
 nnoremap < <<
 nnoremap > >>
 "窗口移动
+map <c-w>f <c-w>b<c-w>w
 nmap <c-j> <c-w>j
 nmap <c-h> <c-w>h  
 nmap <c-k> <c-w>k
@@ -47,10 +53,10 @@ vnoremap <c-a> <c-a>gv
 vnoremap <c-x> <c-x>gv
 vnoremap < <gv      
 vnoremap > >gv  
-map * *zz
-map # #zz
-map n nzz
-map N Nzz
+noremap * *zz
+noremap # #zz
+noremap n nzz
+noremap N Nzz
 
 nnoremap v' vi'
 nnoremap v" vi"
@@ -89,7 +95,8 @@ nnoremap d{ di{
 nnoremap d} di}
 
 noremap H ^
-noremap L $
+vnoremap L $h
+nnoremap L $
 "map <A-j> <c-d>
 "map <A-k> <c-u>
 set mouse=a
@@ -144,3 +151,5 @@ map <Leader> <Plug>(easymotion-prefix)
 map <Leader>s <Plug>(easymotion-s)
 map <Leader>j <Plug>(easymotion-j)
 map <Leader>k <Plug>(easymotion-k)
+map <Leader>h <Plug>(easymotion-linebackward)
+map <Leader>l <Plug>(easymotion-lineforward)
