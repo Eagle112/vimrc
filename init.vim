@@ -3,7 +3,7 @@ if exists('g:vscode')
     nnoremap X "_X
     nnoremap x "_x
 
-    nnoremap c "_c
+    nnoremap <nowait> c "_c
     nnoremap dd "_dd
     nnoremap D "_D
     nnoremap d "_d
@@ -11,20 +11,22 @@ if exists('g:vscode')
     "vnoremap dd "_dd
     vnoremap c "_c
     vmap = <Cmd>call VSCodeNotifyVisual('editor.action.formatSelection',1)<CR><Esc><Esc>
-    map p p`[V`]=<Esc>`]
     map P P`[V`]=<Esc>`]
-    noremap <Tab> <Cmd>call VSCodeNotify('tab')<CR>
+    map p p`[V`]=<Esc>`]
+    "noremap <Tab> <Cmd>call VSCodeNotify('tab')<CR>
     nnoremap O i<Cmd>call VSCodeNotify('editor.action.insertLineBefore')<CR>
     nnoremap o i<Cmd>call VSCodeNotify('editor.action.insertLineAfter')<CR>
     noremap zb <Cmd>call VSCodeNotifyVisual('editor.action.blockComment',1)<CR>
-    noremap za <Cmd>call VSCodeNotify('editor.action.jumpToBracket')<CR>
+    nnoremap za <Cmd>call VSCodeNotify('editor.action.jumpToBracket')<CR>
+    vnoremap za %
     noremap zc <Cmd>call VSCodeNotify('editor.fold')<CR>
     noremap zo <Cmd>call VSCodeNotify('editor.unfold')<CR>
     nnoremap <C-up> <Cmd>call VSCodeNotifyVisual('editor.action.moveLinesUpAction',1)<CR>
     nnoremap <C-down> <Cmd>call VSCodeNotifyVisual('editor.action.moveLinesDownAction',1)<CR>
-    vnoremap <C-down> <Esc>`<my`>mzgv<Cmd>call VSCodeNotifyVisual('editor.action.moveLinesDownAction',1)<CR><Esc>`yjV`zj
-    vnoremap <C-up> <Esc>`<my`>mzgv<Cmd>call VSCodeNotifyVisual('editor.action.moveLinesUpAction',1)<CR><Esc>`ykV`zk
+    vnoremap <C-down> <Esc>`<mY`>mZgv<Cmd>call VSCodeNotifyVisual('editor.action.moveLinesDownAction',1)<CR><Esc>`YjV`Zj
+    vnoremap <C-up> <Esc>`<mY`>mZgv<Cmd>call VSCodeNotifyVisual('editor.action.moveLinesUpAction',1)<CR><Esc>
 else
+    set nu
     call plug#begin('~/AppData/Local/nvim/plugged') 
     Plug 'junegunn/vim-easy-align'
     Plug 'mattn/emmet-vim'
@@ -33,7 +35,13 @@ else
     call plug#end()
 endif
 
-vnoremap $ $h
+set scrolloff=3
+let &t_TI = ""
+let &t_TE = ""
+noremap dF dvF
+noremap dT dvT
+noremap dH dv^
+
 map tt gT
 nnoremap < <<
 nnoremap > >>
@@ -43,60 +51,63 @@ nmap <c-j> <c-w>j
 nmap <c-h> <c-w>h  
 nmap <c-k> <c-w>k
 nmap <c-l> <c-w>l
-nmap ,h <c-w>H
-nmap ,j <c-w>J
-nmap ,k <c-w>K
-nmap ,l <c-w>L
+nmap <nowait> zh <c-w>H
+nmap <nowait> zj <c-w>J
+nmap <nowait> zk <c-w>K
+nmap <nowait> zl <c-w>L
 vmap y y`>
 noremap <c-z> u
 vnoremap <c-a> <c-a>gv
 vnoremap <c-x> <c-x>gv
 vnoremap < <gv      
 vnoremap > >gv  
-noremap * *zz
-noremap # #zz
-noremap n nzz
-noremap N Nzz
+"noremap * * zz
+"noremap # # zz
+"noremap n n zz
+"noremap N N zz
 
-nnoremap v' vi'
-nnoremap v" vi"
-nnoremap v( vi(
-nnoremap v) vi)
-nnoremap v[ vi[
-nnoremap v] vi]
-nnoremap v{ vi{
-nnoremap v} vi}
+onoremap ' i'
+onoremap " i"
+onoremap ( i(
+onoremap ) i)
+onoremap [ i[
+onoremap ] i]
+onoremap { i{
+onoremap } i}
+onoremap <nowait> t it
 
-nnoremap y' yi'
-nnoremap y" yi"
-nnoremap y( yi(
-nnoremap y) yi)
-nnoremap y[ yi[
-nnoremap y] yi]
-nnoremap y{ yi{
-nnoremap y} yi}
+"nnoremap y' yi'
+"nnoremap y" yi"
+"nnoremap y( yi(
+"nnoremap y) yi)
+"nnoremap y[ yi[
+"nnoremap y] yi]
+"nnoremap y{ yi{
+"nnoremap y} yi}
 
-nnoremap c' ci'
-nnoremap c" ci"
-nnoremap c( ci(
-nnoremap c) ci)
-nnoremap c[ ci[
-nnoremap c] ci]
-nnoremap c{ ci{
-nnoremap c} ci}
+"nnoremap c' ci'
+"nnoremap c" ci"
+"nnoremap c( ci(
+"nnoremap c) ci)
+"nnoremap c[ ci[
+"nnoremap c] ci]
+"nnoremap c{ ci{
+"nnoremap c} ci}
 
-nnoremap d' di'
-nnoremap d" di"
-nnoremap d( di(
-nnoremap d) di)
-nnoremap d[ di[
-nnoremap d] di]
-nnoremap d{ di{
-nnoremap d} di}
+"nnoremap d' di'
+"nnoremap d" di"
+"nnoremap d( di(
+"nnoremap d) di)
+"nnoremap d[ di[
+"nnoremap d] di]
+"nnoremap d{ di{
+"nnoremap d} di}
 
+vnoremap $ $h
 noremap H ^
 vnoremap L $h
 nnoremap L $
+nmap dL d$
 "map <A-j> <c-d>
 "map <A-k> <c-u>
 set mouse=a
@@ -138,6 +149,7 @@ call plug#begin('~/AppData/Local/nvim/plugged')
     Plug 'asvetliakov/vim-easymotion', Cond(exists('g:vscode'), { 'as': 'vsc-easymotion' })
     Plug 'justinmk/vim-sneak'
     Plug 'tpope/vim-surround'
+    Plug 'mjbrownie/swapit'
 call plug#end()
 
 autocmd InsertLeave * :silent !D:/chrome下载/im-select.exe 1033
@@ -147,6 +159,7 @@ let g:EasyMotion_smartcase=1
 let g:EasyMotion_keys='asdfghjklqweruiop;zxcvnm'
 let g:EasyMotion_do_mapping=0
 let g:EasyMotion_grouping=2
+let g:sneak#use_ic_scs = 1
 map <Leader> <Plug>(easymotion-prefix)
 map <Leader>s <Plug>(easymotion-s)
 map <Leader>j <Plug>(easymotion-j)
