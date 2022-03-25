@@ -3,11 +3,12 @@ if exists('g:vscode')
     nnoremap X "_X
     nnoremap x "_x
 
+    let mapleader=" "
     nnoremap <nowait> c "_c
     nnoremap dd "_dd
     nnoremap D "_D
-    nnoremap d "_d
-    vnoremap d "_d
+    nnoremap <nowait> d "_d
+    vnoremap <nowait> d "_d
     "vnoremap dd "_dd
     vnoremap c "_c
     vmap = <Cmd>call VSCodeNotifyVisual('editor.action.formatSelection',1)<CR><Esc><Esc>
@@ -16,11 +17,13 @@ if exists('g:vscode')
     "noremap <Tab> <Cmd>call VSCodeNotify('tab')<CR>
     nnoremap O i<Cmd>call VSCodeNotify('editor.action.insertLineBefore')<CR>
     nnoremap o i<Cmd>call VSCodeNotify('editor.action.insertLineAfter')<CR>
-    noremap zb <Cmd>call VSCodeNotifyVisual('editor.action.blockComment',1)<CR>
-    nnoremap za <Cmd>call VSCodeNotify('editor.action.jumpToBracket')<CR>
-    vnoremap za %
+    noremap z/ <Cmd>call VSCodeNotifyVisual('editor.action.blockComment',1)<CR>
+    noremap za <Cmd>call VSCodeNotify('editor.toggleFold')<CR>
+    nnoremap <leader>a <Cmd>call VSCodeNotify('editor.action.jumpToBracket')<CR>
+    vnoremap <leader>a %
     noremap zc <Cmd>call VSCodeNotify('editor.fold')<CR>
     noremap zo <Cmd>call VSCodeNotify('editor.unfold')<CR>
+    noremap zf <Cmd>call VSCodeNotify('actions.find')<CR>
     nnoremap <C-up> <Cmd>call VSCodeNotifyVisual('editor.action.moveLinesUpAction',1)<CR>
     nnoremap <C-down> <Cmd>call VSCodeNotifyVisual('editor.action.moveLinesDownAction',1)<CR>
     vnoremap <C-down> <Esc>`<mY`>mZgv<Cmd>call VSCodeNotifyVisual('editor.action.moveLinesDownAction',1)<CR><Esc>`YjV`Zj
@@ -34,7 +37,8 @@ else
     Plug 'preservim/nerdtree'
     call plug#end()
 endif
-
+"默认进入插入模式
+start
 set scrolloff=3
 let &t_TI = ""
 let &t_TE = ""
@@ -123,7 +127,6 @@ function Cond(cond,...)
     let opts = get(a:000,0,{})
     return a:cond ? opts : extend(opts,{'on':[],'for':[]})
 endfunction
-let mapleader=" "
  
 "function! s:openVSCodeCommandsInVisualMode()
 "    normal! gv
